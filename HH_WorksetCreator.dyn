@@ -1,0 +1,123 @@
+<Workspace Version="1.3.3.4111" X="121.560962475576" Y="130.25133614953" zoom="0.500831356967445" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="False">
+  <NamespaceResolutionMap />
+  <Elements>
+    <CoreNodeModels.Input.Filename guid="26b96a27-8961-445e-9aa3-ff077ea3163c" type="CoreNodeModels.Input.Filename" nickname="File Path" x="416.791821602334" y="417.512157860094" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.String>.\HH_STANDARD WORKSETS.xlsx</System.String>
+      <HintPath>T:\10.0_Design_Technology\APPLICATIONS\DYNAMO\IN PROGRESS\HH_STANDARD WORKSETS.xlsx</HintPath>
+    </CoreNodeModels.Input.Filename>
+    <CoreNodeModels.Input.FileObject guid="f208dcbf-e8b9-44be-a808-7a8dc4bdabfe" type="CoreNodeModels.Input.FileObject" nickname="File.FromPath" x="679.841126734551" y="417.512157860094" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Input.FileObject>
+    <CoreNodeModels.Input.StringInput guid="3979cad9-0ba7-4fe1-b7d9-d5cb86429e5b" type="CoreNodeModels.Input.StringInput" nickname="Desired Sheet" x="522.05221355855" y="587.173889604944" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.String>Sheet1</System.String>
+      <System.String value="Sheet1" />
+    </CoreNodeModels.Input.StringInput>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="482dc243-6cbb-4796-bfae-1664d6b06a39" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Excel.ReadFromFile" x="889.841126734551" y="417.512157860094" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="DSOffice.dll" function="DSOffice.Excel.ReadFromFile@var,string,bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="9a0179d8-d1ce-4b6f-9345-cb86b87b7032" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Flatten" x="1219.84112673455" y="417.512157860094" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="BuiltIn" function="Flatten@var[]..[]">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <PythonNodeModels.PythonNode guid="6579a860-1d60-46f5-9aed-81857d5b13ce" type="PythonNodeModels.PythonNode" nickname="Python Script" x="1459.46520950117" y="416.109013791419" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+# Import ToDSType(bool) extension method
+clr.AddReference("RevitNodes")
+import Revit
+clr.ImportExtensions(Revit.Elements)
+# Import geometry conversion extension methods
+clr.ImportExtensions(Revit.GeometryConversion)
+# Import DocumentManager and TransactionManager
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+from System.Collections.Generic import *
+# Import RevitAPI
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+uidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument
+
+worksetnames = IN[0]
+mDoc = DocumentManager.Instance.CurrentDBDocument
+newWorksets = list()
+
+# Start Transaction
+TransactionManager.Instance.EnsureInTransaction(doc)
+
+for name in worksetnames:
+	Workset.Create(mDoc,name)
+	newWorksets.append(name)
+
+# End Transaction
+TransactionManager.Instance.TransactionTaskDone()
+
+OUT = newWorksets</Script>
+    </PythonNodeModels.PythonNode>
+    <CoreNodeModels.Watch guid="8b6cb5c5-4fdc-48f3-9538-ba33ddbddcdf" type="CoreNodeModels.Watch" nickname="Watch" x="1683.46520950117" y="416.109013791419" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="26b96a27-8961-445e-9aa3-ff077ea3163c" start_index="0" end="f208dcbf-e8b9-44be-a808-7a8dc4bdabfe" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="f208dcbf-e8b9-44be-a808-7a8dc4bdabfe" start_index="0" end="482dc243-6cbb-4796-bfae-1664d6b06a39" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="3979cad9-0ba7-4fe1-b7d9-d5cb86429e5b" start_index="0" end="482dc243-6cbb-4796-bfae-1664d6b06a39" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="482dc243-6cbb-4796-bfae-1664d6b06a39" start_index="0" end="9a0179d8-d1ce-4b6f-9345-cb86b87b7032" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="9a0179d8-d1ce-4b6f-9345-cb86b87b7032" start_index="0" end="6579a860-1d60-46f5-9aed-81857d5b13ce" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="6579a860-1d60-46f5-9aed-81857d5b13ce" start_index="0" end="8b6cb5c5-4fdc-48f3-9538-ba33ddbddcdf" end_index="0" portType="0" />
+  </Connectors>
+  <Notes>
+    <Dynamo.Graph.Notes.NoteModel guid="918bcca3-4f9c-45bd-9231-3179e717e7bb" text="OPERATIONS" x="-165.761293478285" y="978.162061135721" />
+    <Dynamo.Graph.Notes.NoteModel guid="674da2d2-1fd3-4c85-9ad5-96bc5b34caab" text="INPUTS" x="-262.261306994207" y="978.847330374997" />
+    <Dynamo.Graph.Notes.NoteModel guid="8eba9c3d-9950-4ea8-a55c-074aecb8bb77" text="DEPENDENCIES ________________________________________________________&#xD;&#xA;&#xD;&#xA;-None" x="-262.314473276899" y="833.427391741955" />
+    <Dynamo.Graph.Notes.NoteModel guid="c18720ac-7447-48b8-a18e-35d374742cf3" text="This script automates the creation of worksets during project setup. It reads from a central Excel file located on the (T:) drive.  &#xD;&#xA;&#xD;&#xA;To Use:&#xD;&#xA;1) Check location of Excel workset file in &quot;File Path&quot; node. &#xD;&#xA;2) Check sheet in Excel file from which you want Dynamo to read. Change text in  &quot;Desired Sheet&quot; node to match. This IS case sensitive, so make sure the name of the sheet and the entry in this node match exactly.&#xD;&#xA;3) Run.&#xD;&#xA;4) Open worksets in Revit to double check that all desired worksets are present and accounted-for.&#xD;&#xA;&#xD;&#xA;NOTE: &#xD;&#xA;This script should only be run once on a project. If, for some reason during setup, you need to rerun the script, simply delete all of the numbered worksets and re-run the script. &#xD;&#xA;5) Sync to Central and RELINQUISH ALL MINE before exiting your newly workshared project." x="-261.898698206961" y="454.127038361049" />
+    <Dynamo.Graph.Notes.NoteModel guid="a6c7b1f7-71e4-41dc-81e0-f918ff33efc1" text="DYNAMO VERSION&#xD;&#xA;&#xD;&#xA;________________________________________________________&#xD;&#xA;&#xD;&#xA;[1.3.3]" x="-261.898698206961" y="207.264880057179" />
+    <Dynamo.Graph.Notes.NoteModel guid="4868597e-0d84-428f-915a-98adc77173ef" text="REVIT VERSION(S)&#xD;&#xA;________________________________________________________&#xD;&#xA;&#xD;&#xA;[2017-2019]&#xD;&#xA;" x="-261.898698206961" y="323.245406217644" />
+    <Dynamo.Graph.Notes.NoteModel guid="8b5a00ba-4ca0-41fa-a997-e3256113ef7a" text="DYNAMO FILE NAME&#xD;&#xA;________________________________________________________&#xD;&#xA;&#xD;&#xA;[WorksetCreator.dyn]&#xD;&#xA;" x="-262.772148982191" y="91.2843538967146" />
+    <Dynamo.Graph.Notes.NoteModel guid="05b9350f-6b73-4d47-96b1-fd5c35f02b51" text="OUTPUTS" x="-36.2612934782902" y="979.035481233261" />
+  </Notes>
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="dc12c69b-e59e-40b9-a1d2-cb306350a454" annotationText="" left="-175.761293478285" top="948.162061135721" width="110" height="74.5" fontSize="14" InitialTop="978.162061135721" InitialHeight="140" TextblockHeight="20" backgrouund="#FFBB87C6">
+      <Models ModelGuid="918bcca3-4f9c-45bd-9231-3179e717e7bb" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="4ac6b73a-efb0-49b4-8c53-987339a73ba3" annotationText="" left="-272.261306994207" top="948.847330374997" width="79.5" height="74.5" fontSize="14" InitialTop="978.847330374997" InitialHeight="140" TextblockHeight="20" backgrouund="#FFFFAA45">
+      <Models ModelGuid="674da2d2-1fd3-4c85-9ad5-96bc5b34caab" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="be5860a1-1db2-4078-8586-d672217039b9" annotationText="" left="-46.2612934782902" top="949.035481233261" width="91" height="74.5" fontSize="14" InitialTop="979.035481233261" InitialHeight="140" TextblockHeight="20" backgrouund="#FFC1D676">
+      <Models ModelGuid="05b9350f-6b73-4d47-96b1-fd5c35f02b51" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="29f45c0d-1eac-4cd2-a301-3014e68de809" annotationText="WORKSET CREATOR" left="-272.772148982191" top="52.2843538967146" width="319.37345077523" height="868.64303784524" fontSize="24" InitialTop="91.2843538967146" InitialHeight="687.974698013528" TextblockHeight="29" backgrouund="#FFB5B5B5">
+      <Models ModelGuid="a6c7b1f7-71e4-41dc-81e0-f918ff33efc1" />
+      <Models ModelGuid="4868597e-0d84-428f-915a-98adc77173ef" />
+      <Models ModelGuid="c18720ac-7447-48b8-a18e-35d374742cf3" />
+      <Models ModelGuid="8eba9c3d-9950-4ea8-a55c-074aecb8bb77" />
+      <Models ModelGuid="8b5a00ba-4ca0-41fa-a997-e3256113ef7a" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="bc7b60b0-6633-4a9a-9b32-61d08d343b24" annotationText="READ FROM FILE AND WORKSET LIST CREATION" left="669.841126734551" top="371.512157860094" width="739.499999999999" height="191" fontSize="30" InitialTop="417.512157860094" InitialHeight="175.980735620437" TextblockHeight="36" backgrouund="#FFBB87C6">
+      <Models ModelGuid="f208dcbf-e8b9-44be-a808-7a8dc4bdabfe" />
+      <Models ModelGuid="482dc243-6cbb-4796-bfae-1664d6b06a39" />
+      <Models ModelGuid="9a0179d8-d1ce-4b6f-9345-cb86b87b7032" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="e350694f-2f67-4ccd-bc16-6f006e1dc8a7" annotationText="LIST CONVERTED TO WORKSETS" left="1449.46520950117" top="334.109013791419" width="323" height="176" fontSize="30" InitialTop="416.109013791419" InitialHeight="269" TextblockHeight="72" backgrouund="#FFC1D676">
+      <Models ModelGuid="6579a860-1d60-46f5-9aed-81857d5b13ce" />
+      <Models ModelGuid="8b6cb5c5-4fdc-48f3-9538-ba33ddbddcdf" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="efd0ac8a-f3df-4a6e-a8db-8cb663fab624" annotationText="SELECT WORKSET EXCEL FILE AND DESIRED SHEET" left="406.791821602334" top="263.512157860094" width="222.260391956216" height="391.66173174485" fontSize="30" InitialTop="417.512157860094" InitialHeight="264.675025803258" TextblockHeight="144" backgrouund="#FFFFAA45">
+      <Models ModelGuid="26b96a27-8961-445e-9aa3-ff077ea3163c" />
+      <Models ModelGuid="3979cad9-0ba7-4fe1-b7d9-d5cb86429e5b" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>
