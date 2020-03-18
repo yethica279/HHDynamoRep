@@ -1,0 +1,85 @@
+<Workspace Version="1.3.4.6666" X="565.91217065277" Y="147.956948847183" zoom="0.528455761220659" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="False">
+  <NamespaceResolutionMap />
+  <Elements>
+    <Dynamo.Nodes.DSModelElementsSelection guid="65b67545-566e-4c6a-8ad0-5b4857eb3974" type="Dynamo.Nodes.DSModelElementsSelection" nickname="Select Model Elements" x="7.02485833796732" y="120.12248896788" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <instance id="fb877353-2b98-499a-861d-7a56e70d2aef-0011782c" />
+      <instance id="fb877353-2b98-499a-861d-7a56e70d2aef-00117833" />
+      <instance id="fb877353-2b98-499a-861d-7a56e70d2aef-00117836" />
+      <instance id="fb877353-2b98-499a-861d-7a56e70d2aef-00117839" />
+      <instance id="fb877353-2b98-499a-861d-7a56e70d2aef-0011783c" />
+      <instance id="fb877353-2b98-499a-861d-7a56e70d2aef-0011783f" />
+    </Dynamo.Nodes.DSModelElementsSelection>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="2dd0ca60-bb60-4435-90b4-ff0a28b14f97" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="FamilyInstance.SetRotation" x="1442.56584924628" y="122.615622110426" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.FamilyInstance.SetRotation@double">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="690a627c-8f89-4da2-91a3-ce3279832831" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="List.OfRepeatedItem" x="824.5" y="359" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="DSCoreNodes.dll" function="DSCore.List.OfRepeatedItem@var[]..[],int">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="1fa39477-ab47-47eb-a9c3-4e6377840eb9" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="662.444337313082" y="219.697086567547" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="0;&#xA;180;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="15da36e7-505c-4625-890e-5db7bc7bd13d" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Count" x="421.04562985132" y="327.282847761258" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="BuiltIn" function="Count@var[]..[]">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="e46cb263-e19c-445e-b571-a5cce7075cd6" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Math.Random" x="1126.5" y="267" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="DSCoreNodes.dll" function="DSCore.Math.Random@double,double">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="65b67545-566e-4c6a-8ad0-5b4857eb3974" start_index="0" end="2dd0ca60-bb60-4435-90b4-ff0a28b14f97" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="65b67545-566e-4c6a-8ad0-5b4857eb3974" start_index="0" end="15da36e7-505c-4625-890e-5db7bc7bd13d" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="690a627c-8f89-4da2-91a3-ce3279832831" start_index="0" end="e46cb263-e19c-445e-b571-a5cce7075cd6" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1fa39477-ab47-47eb-a9c3-4e6377840eb9" start_index="0" end="690a627c-8f89-4da2-91a3-ce3279832831" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1fa39477-ab47-47eb-a9c3-4e6377840eb9" start_index="1" end="e46cb263-e19c-445e-b571-a5cce7075cd6" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="15da36e7-505c-4625-890e-5db7bc7bd13d" start_index="0" end="690a627c-8f89-4da2-91a3-ce3279832831" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="e46cb263-e19c-445e-b571-a5cce7075cd6" start_index="0" end="2dd0ca60-bb60-4435-90b4-ff0a28b14f97" end_index="1" portType="0" />
+  </Connectors>
+  <Notes>
+    <Dynamo.Graph.Notes.NoteModel guid="53180f20-0421-4e68-b549-0b3b8eb80e36" text="DEPENDENCIES ________________________________________________________&#xD;&#xA;&#xD;&#xA;None" x="-992.252142993521" y="762.34931646132" />
+    <Dynamo.Graph.Notes.NoteModel guid="94e8b7ec-0691-49fb-90ea-e498a3648835" text="DESCRIPTION&#xD;&#xA;________________________________________________________&#xD;&#xA;&#xD;&#xA;User selects objects for rotation. Script randomizes rotation angle and sets it." x="-989.256195113252" y="647.486354454409" />
+    <Dynamo.Graph.Notes.NoteModel guid="fe7e90e3-cf58-4768-a7ac-6f07edea2837" text="REVIT BUILD(S)&#xD;&#xA;________________________________________________________&#xD;&#xA;&#xD;&#xA;2017-2019&#xD;&#xA;" x="-992.225556311025" y="531.505828293947" />
+    <Dynamo.Graph.Notes.NoteModel guid="07a4930e-ebe9-468d-8132-97309ef366bb" text="DYNAMO VERSION&#xD;&#xA;&#xD;&#xA;________________________________________________________&#xD;&#xA;&#xD;&#xA;2.0.2" x="-989.498807645875" y="415.525302133482" />
+    <Dynamo.Graph.Notes.NoteModel guid="f020cffd-0ba5-4745-b638-7c33c8160f76" text="DYNAMO FILE NAME&#xD;&#xA;________________________________________________________&#xD;&#xA;&#xD;&#xA;RandomRotator_ByObjectSelection.dyn" x="-989.352621074259" y="205.504448487826" />
+    <Dynamo.Graph.Notes.NoteModel guid="fec87ec5-b405-4081-9fb2-c7172254619d" text="AUTHOR&#xD;&#xA;&#xD;&#xA;________________________________________________________&#xD;&#xA;&#xD;&#xA;Jessica Brams-Miller" x="-989.176708450768" y="309.275438212271" />
+    <Dynamo.Graph.Notes.NoteModel guid="a43ddba0-4ff8-4278-b232-8d3616b20c8f" text="Outputs at the end of the script" x="-561.660156396555" y="58.2376763190011" />
+    <Dynamo.Graph.Notes.NoteModel guid="8a7d997c-4530-4b46-a1be-dc1c13600fd4" text="Procedures required to run the script" x="-826.182258478493" y="60.4232914972602" />
+    <Dynamo.Graph.Notes.NoteModel guid="e18a48c7-8904-4a53-a5cb-00dc0dc2b509" text="User Inputs Required" x="-991.354249737503" y="60.4232914972602" />
+    <Dynamo.Graph.Notes.NoteModel guid="58d9ebf0-1ede-4ae5-b66c-ab383b3236b2" text="Hart Howerton Dynamo Script Colour Coding" x="-1001.77464301928" y="-36.6179612769289" />
+  </Notes>
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="3040a149-31fa-4977-8e5c-4142a3b6702c" annotationText="OBJECT RANDOM ROTATOR" left="-1002.25214299352" top="123.504448487826" width="322.075434542753" height="726.844867973494" fontSize="30" InitialTop="205.504448487826" InitialHeight="831.198592939989" TextblockHeight="72" backgrouund="#FFB5B5B5">
+      <Models ModelGuid="53180f20-0421-4e68-b549-0b3b8eb80e36" />
+      <Models ModelGuid="94e8b7ec-0691-49fb-90ea-e498a3648835" />
+      <Models ModelGuid="fe7e90e3-cf58-4768-a7ac-6f07edea2837" />
+      <Models ModelGuid="07a4930e-ebe9-468d-8132-97309ef366bb" />
+      <Models ModelGuid="f020cffd-0ba5-4745-b638-7c33c8160f76" />
+      <Models ModelGuid="fec87ec5-b405-4081-9fb2-c7172254619d" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="f2449a8f-6f39-424c-9fb1-1b979885323c" annotationText="OPERATIONS" left="-836.182258478493" top="14.4232914972602" width="235" height="90" fontSize="30" InitialTop="60.4232914972602" InitialHeight="140" TextblockHeight="36" backgrouund="#FFBB87C6">
+      <Models ModelGuid="8a7d997c-4530-4b46-a1be-dc1c13600fd4" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="4dd029b3-e47b-44ea-b228-7b675e1ab7ed" annotationText="OUTPUTS" left="-571.660156396555" top="12.2376763190011" width="207" height="90" fontSize="30" InitialTop="58.2376763190011" InitialHeight="140" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="a43ddba0-4ff8-4278-b232-8d3616b20c8f" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="341762a2-843a-4c0d-ab56-8d5bd84e31d7" annotationText="INPUTS" left="-1001.3542497375" top="14.4232914972602" width="151" height="90" fontSize="30" InitialTop="60.4232914972602" InitialHeight="140" TextblockHeight="36" backgrouund="#FFFFAA45">
+      <Models ModelGuid="e18a48c7-8904-4a53-a5cb-00dc0dc2b509" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="ac1937af-6bc1-4479-a786-b53911bd0e46" annotationText="Object Selection by User" left="-2.97514166203268" top="38.1224889678805" width="258" height="234" fontSize="30" InitialTop="120.12248896788" InitialHeight="182" TextblockHeight="72" backgrouund="#FFFFAA45">
+      <Models ModelGuid="65b67545-566e-4c6a-8ad0-5b4857eb3974" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="88d099d6-4d93-4956-90a0-4374b98080a3" annotationText="Objects' rotations turned into a list and randomized" left="411.04562985132" top="173.697086567547" width="933.45437014868" height="304.302913432453" fontSize="30" InitialTop="219.697086567547" InitialHeight="288.302913432453" TextblockHeight="36" backgrouund="#FFBB87C6">
+      <Models ModelGuid="690a627c-8f89-4da2-91a3-ce3279832831" />
+      <Models ModelGuid="1fa39477-ab47-47eb-a9c3-4e6377840eb9" />
+      <Models ModelGuid="15da36e7-505c-4625-890e-5db7bc7bd13d" />
+      <Models ModelGuid="e46cb263-e19c-445e-b571-a5cce7075cd6" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="19865383-4d12-49b0-b678-dbc6873c6aa4" annotationText="Objects' randomized rotation set" left="1432.56584924628" top="40.615622110426" width="317" height="201" fontSize="30" InitialTop="122.615622110426" InitialHeight="149" TextblockHeight="72" backgrouund="#FFC1D676">
+      <Models ModelGuid="2dd0ca60-bb60-4435-90b4-ff0a28b14f97" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

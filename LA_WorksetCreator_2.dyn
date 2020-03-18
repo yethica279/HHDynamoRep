@@ -1,0 +1,620 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "LA_WorksetCreator_2",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "26b96a278961445e9aa3ff077ea3163c",
+      "Name": "File Path",
+      "Type": "string",
+      "Value": ".\\HH_LA WORKSETS.xlsx",
+      "Description": "Allows you to select a file on the system to get its filename"
+    },
+    {
+      "Id": "3979cad90ba74fe1b7d9d5cb86429e5b",
+      "Name": "Desired Sheet",
+      "Type": "string",
+      "Value": "Sheet1",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "T:\\10.0_Design_Technology\\APPLICATIONS\\DYNAMO\\FINAL\\WorksetCreator\\HH_LA WORKSETS.xlsx",
+      "InputValue": ".\\HH_LA WORKSETS.xlsx",
+      "NodeType": "ExtensionNode",
+      "Id": "26b96a278961445e9aa3ff077ea3163c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "30c3cba79a054b9f94202692d798dc0d",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its filename"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.FileObject, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "f208dcbfe8b944bea8087a8dc4bdabfe",
+      "Inputs": [
+        {
+          "Id": "02914040cc414f6b8a60aad563dd00f9",
+          "Name": "path",
+          "Description": "Path to the file.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "265dcb4b6aad43838dee3d7b0ccb3b15",
+          "Name": "file",
+          "Description": "File object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a file object from a path."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Sheet1",
+      "Id": "3979cad90ba74fe1b7d9d5cb86429e5b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "cf1188d4d9f74ea6b83e717bb2d05f35",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSOffice.Data.ImportExcel@var,string,bool,bool",
+      "Id": "482dc2436cbb4796bfae1664d6b06a39",
+      "Inputs": [
+        {
+          "Id": "d52fefa38ec44ef1909e5cbcd63961fb",
+          "Name": "file",
+          "Description": "File representing the Microsoft Excel spreadsheet.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8ca8dfc6e1694ba9b860759f1e249455",
+          "Name": "sheetName",
+          "Description": "Name of the worksheet containing the data.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "18c57caf8f994643a96b0a4bc8d249bd",
+          "Name": "readAsStrings",
+          "Description": "Toggle to switch between reading Excel file as strings.\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6b3c2ffdcb054297acac768a6f5f7b24",
+          "Name": "showExcel",
+          "Description": "Toggle to switch between showing and hiding the main Excel window.\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b336dce19d8448968f9692b66d7920e2",
+          "Name": "data",
+          "Description": "Rows of data from the Excel worksheet.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Read data from a Microsoft Excel spreadsheet. Data is read by row and returned in a series of lists by row. Rows and columns are zero-indexed; for example, the value in cell A1 will appear in the data list at [0,0]. This node requires Microsoft Excel to be installed.\n\nData.ImportExcel (file: var, sheetName: string, readAsStrings: bool = false, showExcel: bool = true): var[][]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Flatten@var[]..[],int",
+      "Id": "9a0179d8d1ce4b6f9345cb86b87b7032",
+      "Inputs": [
+        {
+          "Id": "7a3e5dbf3e444accb826a3baefb8d6b2",
+          "Name": "list",
+          "Description": "List to flatten.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ab93c1a0d6024b2aa6cd65752a955130",
+          "Name": "amt",
+          "Description": "Layers of nesting to remove.\n\nint\nDefault value : -1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b384856c218449e2be79d66b6458bbac",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n# Import ToDSType(bool) extension method\nclr.AddReference(\"RevitNodes\")\nimport Revit\nclr.ImportExtensions(Revit.Elements)\n# Import geometry conversion extension methods\nclr.ImportExtensions(Revit.GeometryConversion)\n# Import DocumentManager and TransactionManager\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\nfrom System.Collections.Generic import *\n# Import RevitAPI\nclr.AddReference(\"RevitAPI\")\nimport Autodesk\nfrom Autodesk.Revit.DB import *\n\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\nuidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\n\nworksetnames = IN[0]\nmDoc = DocumentManager.Instance.CurrentDBDocument\nnewWorksets = list()\n\n# Start Transaction\nTransactionManager.Instance.EnsureInTransaction(doc)\n\nfor name in worksetnames:\n\tWorkset.Create(mDoc,name)\n\tnewWorksets.append(name)\n\n# End Transaction\nTransactionManager.Instance.TransactionTaskDone()\n\nOUT = newWorksets",
+      "VariableInputPorts": true,
+      "Id": "6579a8601d6046f59aed81857d5b13ce",
+      "Inputs": [
+        {
+          "Id": "ecc517187f23468badc51aef4db481a2",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "768b2f2611a5455bb5f4a8bd4d431556",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "8b6cb5c54fdc48f39538ba33ddbddcdf",
+      "Inputs": [
+        {
+          "Id": "dfd80cbde68e4728ab956dbdf3f59749",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6602b270973a43d78c68e6f5a2309507",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "30c3cba79a054b9f94202692d798dc0d",
+      "End": "02914040cc414f6b8a60aad563dd00f9",
+      "Id": "7965f79a57574490a6835fb713b4fa42"
+    },
+    {
+      "Start": "265dcb4b6aad43838dee3d7b0ccb3b15",
+      "End": "d52fefa38ec44ef1909e5cbcd63961fb",
+      "Id": "cbc22935e4a642d7b243ec6086975df7"
+    },
+    {
+      "Start": "cf1188d4d9f74ea6b83e717bb2d05f35",
+      "End": "8ca8dfc6e1694ba9b860759f1e249455",
+      "Id": "25ed7143afb74fa5ac8a57f07698f050"
+    },
+    {
+      "Start": "b336dce19d8448968f9692b66d7920e2",
+      "End": "7a3e5dbf3e444accb826a3baefb8d6b2",
+      "Id": "57a026fab645452b91f228645052b49c"
+    },
+    {
+      "Start": "b384856c218449e2be79d66b6458bbac",
+      "End": "ecc517187f23468badc51aef4db481a2",
+      "Id": "f3311b521a9040e49c052bd18820c80c"
+    },
+    {
+      "Start": "768b2f2611a5455bb5f4a8bd4d431556",
+      "End": "dfd80cbde68e4728ab956dbdf3f59749",
+      "Id": "d4c5ba13b66d45a9aa2a842c85c73fc6"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "26b96a278961445e9aa3ff077ea3163c",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 416.791821602334,
+        "Y": 417.512157860094
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File.FromPath",
+        "Id": "f208dcbfe8b944bea8087a8dc4bdabfe",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 679.841126734551,
+        "Y": 417.512157860094
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Desired Sheet",
+        "Id": "3979cad90ba74fe1b7d9d5cb86429e5b",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 522.05221355855,
+        "Y": 587.173889604944
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Data.ImportExcel",
+        "Id": "482dc2436cbb4796bfae1664d6b06a39",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 889.841126734551,
+        "Y": 417.512157860094
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Flatten",
+        "Id": "9a0179d8d1ce4b6f9345cb86b87b7032",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1219.84112673455,
+        "Y": 417.512157860094
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "6579a8601d6046f59aed81857d5b13ce",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1459.46520950117,
+        "Y": 416.109013791419
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "8b6cb5c54fdc48f39538ba33ddbddcdf",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1683.46520950117,
+        "Y": 416.109013791419
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "dc12c69be59e40b9a1d2cb306350a454",
+        "Title": "",
+        "Nodes": [
+          "918bcca34f9c45bd92313179e717e7bb"
+        ],
+        "Left": -175.761293478285,
+        "Top": 948.162061135721,
+        "Width": 110.0,
+        "Height": 74.0,
+        "FontSize": 14.0,
+        "InitialTop": 978.162061135721,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 20.0,
+        "Background": "#FFBB87C6"
+      },
+      {
+        "Id": "4ac6b73aefb049b48c53987339a73ba3",
+        "Title": "",
+        "Nodes": [
+          "674da2d21fd34c859ad596bc5b34caab"
+        ],
+        "Left": -272.261306994207,
+        "Top": 948.847330374997,
+        "Width": 80.0,
+        "Height": 74.0,
+        "FontSize": 14.0,
+        "InitialTop": 978.847330374997,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 20.0,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "be5860a11db240788586d672217039b9",
+        "Title": "",
+        "Nodes": [
+          "05b9350f6b734d4796b1fd5c35f02b51"
+        ],
+        "Left": -46.2612934782902,
+        "Top": 949.035481233261,
+        "Width": 91.0,
+        "Height": 74.0,
+        "FontSize": 14.0,
+        "InitialTop": 979.035481233261,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 20.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "29f45c0d1eac4cd2a3013014e68de809",
+        "Title": "WORKSET CREATOR",
+        "Nodes": [
+          "a6c7b1f771e441dc81e0f918ff33efc1",
+          "4868597e0d84428f915a98adc77173ef",
+          "c18720ac744748b8a18e35d374742cf3",
+          "8eba9c3d99504ea8a55c074aecb8bb77",
+          "8b5a00ba4ca041faa997e3256113ef7a"
+        ],
+        "Left": -272.772148982191,
+        "Top": 52.284353896714606,
+        "Width": 319.87345077523,
+        "Height": 869.14303784524043,
+        "FontSize": 24.0,
+        "InitialTop": 91.2843538967146,
+        "InitialHeight": 882.14303784524043,
+        "TextblockHeight": 29.0,
+        "Background": "#FFB5B5B5"
+      },
+      {
+        "Id": "bc7b60b066334a9a9b3261d08d343b24",
+        "Title": "READ FROM FILE AND WORKSET LIST CREATION",
+        "Nodes": [
+          "f208dcbfe8b944bea8087a8dc4bdabfe",
+          "482dc2436cbb4796bfae1664d6b06a39",
+          "9a0179d8d1ce4b6f9345cb86b87b7032"
+        ],
+        "Left": 669.841126734551,
+        "Top": 371.512157860094,
+        "Width": 745.999999999999,
+        "Height": 217.0,
+        "FontSize": 30.0,
+        "InitialTop": 417.512157860094,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 36.0,
+        "Background": "#FFBB87C6"
+      },
+      {
+        "Id": "e350694f2f674ccdbc166f006e1dc8a7",
+        "Title": "LIST CONVERTED TO WORKSETS",
+        "Nodes": [
+          "6579a8601d6046f59aed81857d5b13ce",
+          "8b6cb5c54fdc48f39538ba33ddbddcdf"
+        ],
+        "Left": 1449.46520950117,
+        "Top": 334.109013791419,
+        "Width": 322.0,
+        "Height": 176.0,
+        "FontSize": 30.0,
+        "InitialTop": 416.109013791419,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 72.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "efd0ac8af3df4a6ea8db8cb663fab624",
+        "Title": "SELECT WORKSET EXCEL FILE AND DESIRED SHEET",
+        "Nodes": [
+          "26b96a278961445e9aa3ff077ea3163c",
+          "3979cad90ba74fe1b7d9d5cb86429e5b"
+        ],
+        "Left": 406.791821602334,
+        "Top": 263.512157860094,
+        "Width": 222.26039195621598,
+        "Height": 391.66173174484993,
+        "FontSize": 30.0,
+        "InitialTop": 417.512157860094,
+        "InitialHeight": 314.66173174484993,
+        "TextblockHeight": 144.0,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "918bcca34f9c45bd92313179e717e7bb",
+        "Title": "OPERATIONS",
+        "Nodes": [],
+        "Left": -165.761293478285,
+        "Top": 978.162061135721,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "674da2d21fd34c859ad596bc5b34caab",
+        "Title": "INPUTS",
+        "Nodes": [],
+        "Left": -262.261306994207,
+        "Top": 978.847330374997,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "8eba9c3d99504ea8a55c074aecb8bb77",
+        "Title": "DEPENDENCIES ________________________________________________________\r\n\r\n-None",
+        "Nodes": [],
+        "Left": -262.314473276899,
+        "Top": 833.427391741955,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "c18720ac744748b8a18e35d374742cf3",
+        "Title": "This script automates the creation of worksets during project setup. It reads from a central Excel file located on the (T:) drive.  \r\n\r\nTo Use:\r\n1) Check location of Excel workset file in \"File Path\" node. \r\n2) Check sheet in Excel file from which you want Dynamo to read. Change text in  \"Desired Sheet\" node to match. This IS case sensitive, so make sure the name of the sheet and the entry in this node match exactly.\r\n3) Run.\r\n4) Open worksets in Revit to double check that all desired worksets are present and accounted-for.\r\n\r\nNOTE: \r\nThis script should only be run once on a project. If, for some reason during setup, you need to rerun the script, simply delete all of the numbered worksets and re-run the script. \r\n5) Sync to Central and RELINQUISH ALL MINE before exiting your newly workshared project.",
+        "Nodes": [],
+        "Left": -261.898698206961,
+        "Top": 454.127038361049,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "a6c7b1f771e441dc81e0f918ff33efc1",
+        "Title": "DYNAMO VERSION\r\n\r\n________________________________________________________\r\n\r\n[1.3.3]",
+        "Nodes": [],
+        "Left": -261.898698206961,
+        "Top": 207.264880057179,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "4868597e0d84428f915a98adc77173ef",
+        "Title": "REVIT VERSION(S)\r\n________________________________________________________\r\n\r\n[2017-2019]\r\n",
+        "Nodes": [],
+        "Left": -261.898698206961,
+        "Top": 323.245406217644,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "8b5a00ba4ca041faa997e3256113ef7a",
+        "Title": "DYNAMO FILE NAME\r\n________________________________________________________\r\n\r\n[WorksetCreator.dyn]\r\n",
+        "Nodes": [],
+        "Left": -262.772148982191,
+        "Top": 91.2843538967146,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "05b9350f6b734d4796b1fd5c35f02b51",
+        "Title": "OUTPUTS",
+        "Nodes": [],
+        "Left": -36.2612934782902,
+        "Top": 979.035481233261,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 258.78365943185361,
+    "Y": 136.25493603734819,
+    "Zoom": 0.53310646032539066
+  }
+}
